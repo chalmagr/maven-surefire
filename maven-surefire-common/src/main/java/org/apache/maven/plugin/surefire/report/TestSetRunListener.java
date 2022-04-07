@@ -312,7 +312,7 @@ public class TestSetRunListener
         for ( WrappedReportEntry reportEntry : detailsForThis.getReportEntries() )
         {
             TestMethodStats methodStats =
-                new TestMethodStats( reportEntry.getClassMethodName(), reportEntry.getReportEntryType(),
+                new TestMethodStats( reportEntry.getReportClassMethodName(), reportEntry.getReportEntryType(),
                                      reportEntry.getStackTraceWriter() );
             testMethodStats.add( methodStats );
         }

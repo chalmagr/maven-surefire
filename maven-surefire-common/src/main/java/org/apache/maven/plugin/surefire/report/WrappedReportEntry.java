@@ -156,6 +156,11 @@ public class WrappedReportEntry
         return formatElapsedTime( getElapsed() );
     }
 
+    String getReportClassMethodName()
+    {
+        return getReportSourceName() + "." + getReportName();
+    }
+
     String getReportSourceName()
     {
         String sourceName = getSourceName();
@@ -194,7 +199,7 @@ public class WrappedReportEntry
 
     public String getElapsedTimeSummary()
     {
-        String description = getName() == null ? getSourceName() : getClassMethodName();
+        String description = getName() == null ? getSourceName() : getReportClassMethodName();
         return description + "  " + getElapsedTimeVerbose();
     }
 
