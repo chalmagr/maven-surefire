@@ -177,14 +177,14 @@ public class StatelessXmlReporter
         Map<String, Map<String, List<WrappedReportEntry>>> classMethodStatistics = new LinkedHashMap<>();
         for ( WrappedReportEntry methodEntry : aggregateCacheFromMultipleReruns( testSetReportEntry, testSetStats ) )
         {
-            String testClassName = methodEntry.getSourceName();
+            String testClassName = methodEntry.getReportSourceName();
             Map<String, List<WrappedReportEntry>> stats = classMethodStatistics.get( testClassName );
             if ( stats == null )
             {
                 stats = new LinkedHashMap<>();
                 classMethodStatistics.put( testClassName, stats );
             }
-            String methodName = methodEntry.getName();
+            String methodName = methodEntry.getReportName();
             List<WrappedReportEntry> methodRuns = stats.get( methodName );
             if ( methodRuns == null )
             {
@@ -199,7 +199,7 @@ public class StatelessXmlReporter
     private Deque<WrappedReportEntry> aggregateCacheFromMultipleReruns( WrappedReportEntry testSetReportEntry,
                                                                        TestSetStats testSetStats )
     {
-        String suiteClassName = testSetReportEntry.getSourceName();
+        String suiteClassName = testSetReportEntry.getReportSourceName();
         Deque<WrappedReportEntry> methodRunHistory = getAddMethodRunHistoryMap( suiteClassName );
         methodRunHistory.addAll( testSetStats.getReportEntries() );
         return methodRunHistory;
