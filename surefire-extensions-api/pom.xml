@@ -52,12 +52,6 @@
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
-            <classifier>runtime</classifier>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -84,15 +78,12 @@
                     <includes>
                         <include>**/JUnit4SuiteTest.java</include>
                     </includes>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-shadefire</artifactId>
-                        <version>3.0.0-M4</version> <!-- ${shadedVersion}, but resolved due to https://issues.apache.org/jira/browse/MRELEASE-799 -->
+                        <version>3.0.0-M6</version> <!-- ${shadedVersion}, but resolved due to https://issues.apache.org/jira/browse/MRELEASE-799 -->
                     </dependency>
                 </dependencies>
             </plugin>

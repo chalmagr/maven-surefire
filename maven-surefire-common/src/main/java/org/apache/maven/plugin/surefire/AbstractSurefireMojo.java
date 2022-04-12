@@ -299,7 +299,7 @@ public abstract class AbstractSurefireMojo
     private ArtifactRepository localRepository;
 
     /**
-     * List of System properties to pass to the JUnit tests.
+     * List of System properties to pass to a provider.
      *
      * @deprecated Use systemPropertyVariables instead.
      */
@@ -308,7 +308,7 @@ public abstract class AbstractSurefireMojo
     private Properties systemProperties;
 
     /**
-     * List of System properties to pass to the JUnit tests.
+     * List of System properties to pass to a provider.
      *
      * @since 2.5
      */
@@ -373,7 +373,9 @@ public abstract class AbstractSurefireMojo
      * JVM is executing one test-class. See also the parameter {@code reuseForks} for the lifetime of JVM.
      *
      * @since 2.1
+     * @deprecated
      */
+    @Deprecated
     @Parameter( property = "forkMode", defaultValue = "once" )
     private String forkMode;
 
