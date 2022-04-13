@@ -72,21 +72,31 @@ public class WrappedReportEntryTest
 
     public void testDisplayNames()
     {
+        String className = "surefire.testcase.JunitParamsTest";
+        String displayClassName = "dn1";
+        String testName = "testSum";
+        String testDisplayName = "dn2";
+
         ReportEntry reportEntry = new SimpleReportEntry( NORMAL_RUN, 0L,
-            "surefire.testcase.JunitParamsTest", "dn1", "testSum", "dn2", "exception" );
+            className, displayClassName, testName, testDisplayName, "exception" );
         WrappedReportEntry wr = new WrappedReportEntry( reportEntry, ERROR, 12, null, null );
+
+        assertEquals( "dn1.dn2", wr.getReportClassMethodName() );
         assertEquals( "surefire.testcase.JunitParamsTest.testSum", wr.getClassMethodName() );
-        assertEquals( "dn1", wr.getReportSourceName() );
+
         assertEquals( "dn1(BDD)", wr.getReportSourceName( "BDD" ) );
         assertEquals( "surefire.testcase.JunitParamsTest(BDD)", wr.getSourceName( "BDD" ) );
-        assertEquals( "dn2", wr.getReportName() );
+
+        assertEquals( displayClassName, wr.getReportSourceName() );
+        assertEquals( testDisplayName, wr.getReportName() );
+
         assertFalse( wr.isSucceeded() );
         assertTrue( wr.isErrorOrFailure() );
         assertFalse( wr.isSkipped() );
         assertNull( wr.getStackTraceWriter() );
-        assertEquals( "surefire.testcase.JunitParamsTest.testSum  Time elapsed: 0.012 s",
+        assertEquals( "dn1.dn2  Time elapsed: 0.012 s",
                 wr.getElapsedTimeSummary() );
-        assertEquals( "surefire.testcase.JunitParamsTest.testSum  Time elapsed: 0.012 s  <<< ERROR!",
+        assertEquals( "dn1.dn2  Time elapsed: 0.012 s  <<< ERROR!",
                 wr.getOutput( false ) );
         assertEquals( "exception", wr.getMessage() );
     }
