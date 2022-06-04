@@ -28,7 +28,6 @@ import org.apache.maven.surefire.api.testset.TestSetFailedException;
 import org.testng.TestNG;
 import org.testng.xml.XmlSuite;
 
-import static java.lang.Integer.parseInt;
 import static org.apache.maven.surefire.api.booter.ProviderParameterNames.PARALLEL_PROP;
 import static org.apache.maven.surefire.api.booter.ProviderParameterNames.THREADCOUNT_PROP;
 import static org.apache.maven.surefire.testng.conf.AbstractDirectConfigurator.loadListenerClasses;
@@ -61,10 +60,30 @@ public class TestNGMapConfigurator
     public void configure( XmlSuite suite, Map<String, String> options )
         throws TestSetFailedException
     {
-        String threadCountAsString = options.get( THREADCOUNT_PROP );
-        int threadCount = threadCountAsString == null ? 1 : parseInt( threadCountAsString );
-        suite.setThreadCount( threadCount );
-
+        configureThreadCount( suite, options );
+        configureParallel( suite, options );
+    }
+    
+    protected void configureThreadCount( XmlSuite suite, Map<String, String> options )
+        throws TestSetFailedException
+    {
+        String threadCount = options.get( THREADCOUNT_PROP );
+        if ( threadCount != null )
+        {
+            try
+            {
+                suite.setThreadCount( Integer.parseInt( threadCount ) );
+            }
+            catch ( NumberFormatException e )
+            {
+                throw new TestSetFailedException( "Non-integer TestNG [threadcount] setting: " + threadCount, e );
+            }
+        }
+    }
+    
+    protected void configureParallel( XmlSuite suite, Map<String, String> options )
+        throws TestSetFailedException
+    {
         String parallel = options.get( PARALLEL_PROP );
         if ( parallel != null )
         {

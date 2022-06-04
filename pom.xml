@@ -23,12 +23,12 @@
   <parent>
     <artifactId>maven-parent</artifactId>
     <groupId>org.apache.maven</groupId>
-    <version>35</version>
+    <version>36</version>
   </parent>
 
   <groupId>org.apache.maven.surefire</groupId>
   <artifactId>surefire</artifactId>
-  <version>3.0.0-M7-SNAPSHOT</version>
+  <version>3.0.0-M8-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Maven Surefire</name>
@@ -96,7 +96,7 @@
     <!-- maven-shared-utils:3.3.4 uses org.fusesource.jansi:jansi:2.2.0 -->
     <mavenSharedUtilsVersion>3.3.4</mavenSharedUtilsVersion>
     <powermockVersion>2.0.9</powermockVersion>
-    <jacocoVersion>0.8.7</jacocoVersion>
+    <jacocoVersion>0.8.8</jacocoVersion>
     <surefire-shared-utils.version>${project.version}</surefire-shared-utils.version>
     <maven.surefire.scm.devConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-surefire.git</maven.surefire.scm.devConnection>
     <maven.site.path>surefire-archives/surefire-LATEST</maven.site.path>
@@ -104,7 +104,7 @@
     <maven.compiler.testTarget>1.${javaVersion}</maven.compiler.testTarget>
     <jvm9ArgsTests />
     <jvm.args.tests>${jvm9ArgsTests} -Xms32m -Xmx144m -XX:SoftRefLRUPolicyMSPerMB=50 -Djava.awt.headless=true -Djdk.net.URLClassPath.disableClassPathURLCheck=true</jvm.args.tests>
-    <project.build.outputTimestamp>2022-03-30T21:54:09Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2022-06-03T09:25:43Z</project.build.outputTimestamp>
   </properties>
 
   <dependencyManagement>
@@ -296,7 +296,7 @@
       <dependency>
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.22.0-GA</version>
+        <version>3.29.0-GA</version>
       </dependency>
       <!-- END: PowerMock@Java9 -->
       <dependency>
@@ -360,22 +360,8 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <!-- TODO remove with next parent -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.16.0</version>
-        </plugin>
-        <plugin>
-          <!-- TODO remove with next parent -->
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>taglist-maven-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <!-- TODO version remove with next parent -->
-          <version>3.10.1</version>
           <configuration>
             <fork>true</fork>
             <compilerArgs>
@@ -568,18 +554,6 @@
       <id>reporting</id>
       <reporting>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <reportSets>
-              <reportSet>
-                <reports>
-                  <report>cpd</report>
-                  <report>pmd</report>
-                </reports>
-              </reportSet>
-            </reportSets>
-          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-changes-plugin</artifactId>

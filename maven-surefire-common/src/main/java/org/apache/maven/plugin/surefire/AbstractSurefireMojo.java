@@ -2049,6 +2049,7 @@ public abstract class AbstractSurefireMojo
             ResolvePathsRequest<String> req = ResolvePathsRequest.ofStrings( testClasspath.getClassPath() )
                     .setIncludeAllProviders( true )
                     .setJdkHome( javaHome )
+                    .setIncludeStatic( true )
                     .setModuleDescriptor( javaModuleDescriptor );
 
             ResolvePathsResult<String> result = getLocationManager().resolvePaths( req );
@@ -3116,9 +3117,12 @@ public abstract class AbstractSurefireMojo
 
     private void printDefaultSeedIfNecessary()
     {
-        if ( getRunOrderRandomSeed() == null && getRunOrder().equals( RunOrder.RANDOM.name() ) )
+        if ( getRunOrder().equals( RunOrder.RANDOM.name() ) )
         {
-            setRunOrderRandomSeed( System.nanoTime() );
+            if ( getRunOrderRandomSeed() == null )
+            {
+                setRunOrderRandomSeed( System.nanoTime() );
+            }
             getConsoleLogger().info(
                 "Tests will run in random order. To reproduce ordering use flag -D"
                     + getPluginName() + ".runOrder.random.seed=" + getRunOrderRandomSeed() );

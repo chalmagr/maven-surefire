@@ -1,4 +1,4 @@
-package org.apache.maven.surefire.its;
+package org.apache.maven.surefire.api.util;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -19,28 +19,21 @@ package org.apache.maven.surefire.its;
  * under the License.
  */
 
-import org.apache.maven.surefire.its.fixture.SurefireJUnit4IntegrationTestCase;
-import org.junit.Test;
+import java.io.File;
 
 /**
+ * Centralized file management of surefire.
+ *
+ * @author Markus Spann
  */
-@SuppressWarnings( "checkstyle:magicnumber" )
-public class CheckTestNg740ParallelIT
-    extends SurefireJUnit4IntegrationTestCase
+public final class SureFireFileManager
 {
-    @Test
-    public void withTestNG740AndParallelSet()
+
+    public static File createTempFile( String prefix, String suffix )
     {
-        unpack( "testng-740-parallel" )
-            .executeTest()
-            .assertTestSuiteResults( 2, 0, 0, 0 );
+
+        return TempFileManager.instance( "surefire" ).createTempFile( prefix, suffix );
+
     }
-    
-    @Test
-    public void withTestNG740AndParallelSetWithoutThreadCount()
-    {
-        unpack( "testng-740-parallel-without-threadcount" )
-            .executeTest()
-            .assertTestSuiteResults( 2, 0, 0, 0 );
-    }
+
 }
